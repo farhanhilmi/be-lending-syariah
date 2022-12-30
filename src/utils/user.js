@@ -20,6 +20,16 @@ const validateUser = (user) => {
     return schema.validate(user, options);
 };
 
+const validateSendEmail = (data) => {
+    const schema = Joi.object().keys({
+        recipient: Joi.string().required(),
+    });
+    const options = {
+        abortEarly: false, // include all errors
+    };
+    return schema.validate(data, options);
+};
+
 /**
  *
  * @param {String} password user password plain text
@@ -63,4 +73,15 @@ const generateAccessToken = (userId) => {
     });
 };
 
-export { validateUser, hashPassword, verifyPassword, generateAccessToken };
+const generateRandomCode = () => {
+    return Math.floor(Math.random() * 90000) + 10000;
+};
+
+export {
+    validateUser,
+    hashPassword,
+    verifyPassword,
+    generateAccessToken,
+    generateRandomCode,
+    validateSendEmail,
+};

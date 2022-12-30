@@ -1,4 +1,6 @@
 import userService from '../service/userService.js';
+import { generateRandomCode } from '../utils/user.js';
+import mailService from '../service/mailService.js';
 
 const postNewUser = async (req, res, next) => {
     const user = req.body;
