@@ -2,10 +2,20 @@ import express, { json, urlencoded } from 'express';
 
 import Routes from './routes/index.js';
 
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, './utils/template.html'));
+});
 
 app.use('/api/', Routes());
 
