@@ -11,6 +11,11 @@
     },
     "author": "Farhan Hilmi",
     "license": "ISC",
+    "pkg": {
+        "options": [
+            "experimental-modules"
+        ]
+    },
     "dependencies": {
         "crypto": "^1.0.1",
         "dotenv": "^16.0.3",
