@@ -5,6 +5,7 @@ import app from './app.js';
 
 const startServer = async () => {
     try {
+        mongoose.set('strictQuery', false);
         await mongoose
             .connect(config.db.uri)
             .then(() => console.log('Connected to DB'));

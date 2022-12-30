@@ -1,4 +1,5 @@
 import express, { json, urlencoded } from 'express';
+import morgan from 'morgan';
 
 import Routes from './routes/index.js';
 
@@ -12,6 +13,13 @@ const app = express();
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
+app.use(
+    morgan(':method :url :status :res[content-length] - :response-time ms'),
+);
+
+morgan.token('param', function (req, res, param) {
+    return req.params[param];
+});
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, './utils/template.html'));
