@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
             minlength: 5,
             required: 'Password is required!',
         },
+        verified: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: { createdAt: 'createdDate: ', updatedAt: 'modifyDate: ' },
