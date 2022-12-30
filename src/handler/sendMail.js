@@ -2,7 +2,7 @@ import config from '../config/index.js';
 import mailService from '../service/mailService.js';
 import { generateRandomCode } from '../utils/user.js';
 
-const verifyEmail = async (req, res, next) => {
+const sendMail = async (req, res, next) => {
     const payload = req.body;
     const randomNum = generateRandomCode();
     const data = {
@@ -31,4 +31,4 @@ const verifyEmail = async (req, res, next) => {
     }
 };
 
-export default { verifyEmail };
+export default { sendMail };

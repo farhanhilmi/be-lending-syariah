@@ -29,12 +29,43 @@ const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        const accessToken = await userService.login({ email, password });
+        const result = await userService.login({ email, password });
+        if (!result) {
+            res.status(400).json({
+                success: false,
+                message: 'belum verif',
+                deta: [],
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: 'success',
+                accessToken: result,
+            });
+        }
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(400).json({
+                success: false,
+                message: err.message,
+                data: [],
+            });
+        } else {
+            next(err);
+        }
+    }
+};
+
+const verifyEmail = async (req, res, next) => {
+    try {
+        const { email } = req.body;
+
+        const result = await userService.verifyEmail({ email });
 
         res.status(200).json({
             success: true,
-            message: 'success',
-            accessToken,
+            message: 'success verified user account',
+            data: result,
         });
     } catch (err) {
         if (err instanceof Error) {
@@ -52,4 +83,5 @@ const login = async (req, res, next) => {
 export default {
     login,
     postNewUser,
+    verifyEmail,
 };

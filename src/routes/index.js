@@ -8,7 +8,8 @@ const Routes = () => {
 
     router.post('/authentication/register', authHandler.postNewUser);
     router.post('/authentication/login', authHandler.login);
-    router.post('/authentication/otp/email', sendEmail.verifyEmail);
+    router.post('/authentication/verify/email', authHandler.verifyEmail);
+    router.post('/authentication/otp/email', sendEmail.sendMail);
 
     return router;
 };
