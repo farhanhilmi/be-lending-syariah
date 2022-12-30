@@ -4,7 +4,6 @@
     "description": "service BE untuk support mobile app",
     "main": "src/app.js",
     "type": "module",
-    "build": "pkg --targets=node12-win-x64 --output=iisnode-pkg.exe --options experimental-modules src/server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/server.js",
@@ -12,11 +11,6 @@
     },
     "author": "Farhan Hilmi",
     "license": "ISC",
-    "pkg": {
-        "options": [
-            "experimental-modules"
-        ]
-    },
     "dependencies": {
         "crypto": "^1.0.1",
         "dotenv": "^16.0.3",
