@@ -1,0 +1,25 @@
+{
+    "name": "service-be",
+    "version": "1.0.0",
+    "description": "service BE untuk support mobile app",
+    "main": "src/app.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/server.js",
+        "dev": "nodemon src/server.js"
+    },
+    "author": "Farhan Hilmi",
+    "license": "ISC",
+    "dependencies": {
+        "crypto": "^1.0.1",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "joi": "^17.7.0",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.8.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
+}
