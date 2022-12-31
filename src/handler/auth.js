@@ -60,6 +60,10 @@ const verifyEmail = async (req, res, next) => {
     try {
         const { email } = req.body;
 
+        // ! TODO Validation
+        // Check if user belum regis
+        // check if email user sudah terverifikasi
+
         const result = await userService.verifyEmail({ email });
 
         res.status(200).json({

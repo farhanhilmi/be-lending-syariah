@@ -6,6 +6,8 @@ import {
 } from '../utils/user.js';
 import userModel from '../models/user.js';
 
+import { isUserExist, isUserVerified } from '../utils/users/validation.js';
+
 const createUser = async (user) => {
     try {
         const { error } = validateUser(user);
@@ -65,8 +67,14 @@ const verifyEmail = async ({ email }) => {
     try {
         if (!email) throw new Error('Email input is required!');
 
-        const isExist = await userModel.exists({ email: email });
-        if (!isExist) throw new Error('Email Not Found!');
+        if (!(await isUserExist({ key: 'email', value: email }))) {
+            throw new Error('Email Not Found!');
+        }
+
+        if (await isUserVerified(email)) {
+            throw new Error('This email has already been verified');
+        }
+
         const user = await userModel.findOne({ email: email });
         const newData = { ...user._doc, verified: true };
 
