@@ -9,10 +9,19 @@ import config from '../config/index.js';
  * @returns
  */
 const validateUser = (user) => {
+    const regexValidator =
+        /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){5,}$/m;
     const schema = Joi.object().keys({
         name: Joi.string().min(3).required(),
         email: Joi.string().required(),
-        password: Joi.string().min(5).required(),
+        password: Joi.string().regex(regexValidator).required().messages({
+            'string.base': `"a" should be a type of 'text'`,
+            'string.empty': `Password cannot be an empty field`,
+            'string.pattern.base':
+                'Password must contain at least 5 characters including upper + lowercase + numbers and special character',
+            'any.required': `Password is a required field`,
+            'object.regex': 'Must have at least {#limit} characters',
+        }),
     });
     const options = {
         abortEarly: false, // include all errors
