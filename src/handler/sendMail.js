@@ -1,4 +1,3 @@
-import config from '../config/index.js';
 import mailService from '../service/mailService.js';
 import { generateRandomCode } from '../utils/user.js';
 
@@ -7,8 +6,8 @@ const sendMail = async (req, res, next) => {
     const randomNum = generateRandomCode();
     const data = {
         ...payload,
-        subject: 'Email Verification',
-        content: `adjakdjakdjk ${randomNum}`,
+        subject: `Verify Your Email [P2P Lending Syariah]`,
+        code: randomNum,
     };
     try {
         await mailService.sendMail(data);

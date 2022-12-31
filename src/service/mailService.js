@@ -1,4 +1,6 @@
+import fs from 'fs';
 import nodemailer from 'nodemailer';
+import mustache from 'mustache';
 import config from '../config/index.js';
 
 const sendMail = async (data) => {
@@ -18,26 +20,25 @@ const sendMail = async (data) => {
                 refreshToken: config.mail.OAUTH_REFRESH_TOKEN,
             },
         });
+
+        const template = fs.readFileSync(
+            './src/utils/mail/template.html',
+            'utf8',
+        );
+
         const mailOptions = {
-            from: config.mail.user,
+            from: 'P2P Lending Syariah',
             to: data.recipient,
             subject: data.subject,
-            text: data.content,
+            html: mustache.render(template, { ...data }),
+            // text: data.content,
         };
 
         transporter.sendMail(mailOptions);
         return true;
     } catch (err) {
         console.log(err);
-        if (err instanceof Error) {
-            res.status(400).json({
-                success: false,
-                message: err.message,
-                data: [],
-            });
-        } else {
-            next(err);
-        }
+        throw new Error(err.message);
     }
 };
 
