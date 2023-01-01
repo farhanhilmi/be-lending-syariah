@@ -27,7 +27,10 @@ const sendMail = async (data) => {
         );
 
         const mailOptions = {
-            from: 'P2P Lending Syariah',
+            from: {
+                name: 'P2P Lending Syariah',
+                address: 'lendingsyariah@gmail.com',
+            },
             to: data.recipient,
             subject: data.subject,
             html: mustache.render(template, { ...data }),
