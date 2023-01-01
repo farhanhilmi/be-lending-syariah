@@ -24,4 +24,26 @@ const postNewLoan = async (req, res, next) => {
     }
 };
 
-export default { postNewLoan };
+const getAllLoans = async (req, res, next) => {
+    try {
+        const data = await loanService.fetchAll();
+
+        res.status(200).json({
+            success: true,
+            message: 'success fetching all loans data',
+            data,
+        });
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(400).json({
+                success: false,
+                message: err.message,
+                data: [],
+            });
+        } else {
+            next(err);
+        }
+    }
+};
+
+export default { postNewLoan, getAllLoans };

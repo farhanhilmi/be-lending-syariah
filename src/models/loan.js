@@ -26,7 +26,16 @@ const loanSchema = new mongoose.Schema(
     {
         timestamps: { createdAt: 'createdDate', updatedAt: 'modifyDate' },
         collection: 'loans',
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
     },
 );
+
+loanSchema.virtual('user', {
+    ref: 'users',
+    localField: 'userId',
+    foreignField: '_id',
+    justOne: true,
+});
 
 export default mongoose.model('loan', loanSchema);

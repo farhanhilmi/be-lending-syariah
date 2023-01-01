@@ -20,4 +20,18 @@ const submitLoan = async (payload) => {
     }
 };
 
-export default { submitLoan };
+const fetchAll = async () => {
+    try {
+        const data = await loanModel.find().populate({
+            model: 'users',
+            path: 'user',
+            select: '_id name email',
+        });
+        return data;
+    } catch (err) {
+        console.log(err);
+        throw new Error(err.message);
+    }
+};
+
+export default { submitLoan, fetchAll };

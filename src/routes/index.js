@@ -12,6 +12,7 @@ const Routes = () => {
     router.post('/authentication/login', authHandler.login);
     router.post('/authentication/verify/email', authHandler.verifyEmail);
     router.post('/authentication/otp/email', sendEmail.sendMail);
+    router.get('/loans/borrower', authenticateToken, loans.getAllLoans);
     router.post('/loans/borrower/new', authenticateToken, loans.postNewLoan);
 
     return router;
