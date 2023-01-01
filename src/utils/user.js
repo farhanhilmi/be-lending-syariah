@@ -29,6 +29,19 @@ const validateUser = (user) => {
     return schema.validate(user, options);
 };
 
+const validateLoanRequest = (data) => {
+    const schema = Joi.object().keys({
+        userId: Joi.string().required(),
+        loan_amount: Joi.number().required(),
+        borrowing_period: Joi.string().required(),
+        tujuan_pinjaman: Joi.string().required(),
+    });
+    const options = {
+        abortEarly: false, // include all errors
+    };
+    return schema.validate(data, options);
+};
+
 const validateSendEmail = (data) => {
     const schema = Joi.object().keys({
         recipient: Joi.string().required(),
@@ -93,4 +106,5 @@ export {
     generateAccessToken,
     generateRandomCode,
     validateSendEmail,
+    validateLoanRequest,
 };

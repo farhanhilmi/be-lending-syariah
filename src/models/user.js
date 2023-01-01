@@ -27,9 +27,9 @@ const userSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps: { createdAt: 'createdDate: ', updatedAt: 'modifyDate: ' },
+        timestamps: { createdAt: 'createdDate', updatedAt: 'modifyDate' },
         collection: 'users',
     },
 );
 
-export default mongoose.model('Users', userSchema);
+export default mongoose.model('users', userSchema);
