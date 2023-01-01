@@ -4,7 +4,11 @@ const postNewLoan = async (req, res, next) => {
     const payload = req.body;
 
     try {
-        const data = await loanService.submitLoan(payload);
+        console.log('req', req.user);
+        const data = await loanService.submitLoan({
+            ...payload,
+            userId: req.user.userId,
+        });
 
         res.status(200).json({
             success: true,
