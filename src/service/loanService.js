@@ -8,6 +8,12 @@ const submitLoan = async (payload) => {
         if (error) {
             throw new Error(error.details.map((err) => err.message));
         }
+        const isExist = await loanModel.exists({ userId: payload.userId });
+        if (isExist) {
+            throw new Error(
+                'You have already submitted a loan application. You must settle your current active debt bills!',
+            );
+        }
 
         const data = await loanModel.create({
             ...payload,
