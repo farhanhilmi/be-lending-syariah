@@ -89,8 +89,26 @@ const verifyEmail = async ({ email }) => {
     }
 };
 
+const profile = async ({ userId }) => {
+    try {
+        if (!userId) throw new Error('userId input is required!');
+        let user = await userModel.findOne({ _id: userId });
+
+        if (!user) throw new Error('User not found');
+        user = {
+            ...user._doc,
+            avatar: `https://ui-avatars.com/api/?name=${user.name}`,
+        };
+        return user;
+    } catch (err) {
+        console.log(err);
+        throw new Error(err.message);
+    }
+};
+
 export default {
     createUser,
     login,
     verifyEmail,
+    profile,
 };

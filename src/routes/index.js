@@ -15,6 +15,8 @@ const Routes = () => {
     router.get('/loans/borrower', authenticateToken, loans.getAllLoans);
     router.post('/loans/borrower/new', authenticateToken, loans.postNewLoan);
 
+    router.get('/user/profile', authenticateToken, authHandler.getUserProfile);
+
     return router;
 };
 export default Routes;
